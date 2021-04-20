@@ -4,6 +4,9 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.itextpdf.text.Anchor;
 import com.itextpdf.text.Chunk;
 import com.itextpdf.text.Document;
@@ -21,12 +24,14 @@ import com.itextpdf.text.pdf.draw.DottedLineSeparator;
 import com.itextpdf.text.pdf.draw.LineSeparator;
 
 public class PdfUtils {
-    
+    private static Logger logger = LoggerFactory.getLogger(PdfUtils.class);
     // main测试
     public static void main(String[] args) throws Exception {
+            logger.info("生成PDF开始！");
             String storePath = "C:\\Users\\EDZ\\Desktop\\PDFDemo.pdf";
             // 4.向文档中添加内容
             CreatePdf(storePath);
+            logger.info("生成PDF结束！");
     }
  
     // main测试
@@ -112,7 +117,7 @@ public class PdfUtils {
         // 表格
         PdfPTable table = createTable(new float[] { 40, 120, 120, 120, 80, 80 });
         table.addCell(createCell("美好的一天", headfont, Element.ALIGN_CENTER, 6, false));
-        table.addCell(createCell("早上9:00", keyfont, Element.ALIGN_CENTER));
+        table.addCell(createCell("序号", keyfont, Element.ALIGN_CENTER));
         table.addCell(createCell("中午11:00", keyfont, Element.ALIGN_CENTER));
         table.addCell(createCell("中午13:00", keyfont, Element.ALIGN_CENTER));
         table.addCell(createCell("下午15:00", keyfont, Element.ALIGN_CENTER));
@@ -146,8 +151,7 @@ public class PdfUtils {
  
  
 /**------------------------创建表格单元格的方法start----------------------------*/
-    /**
-     * 创建单元格(指定字体)
+    /**创建单元格(指定字体)
      * @param value
      * @param font
      * @return
@@ -163,8 +167,7 @@ public class PdfUtils {
         }
         return newDocument;
     }
-    /**
-     * 创建单元格(指定字体)
+    /**创建单元格(指定字体)
      * @param value
      * @param font
      * @return
@@ -176,8 +179,7 @@ public class PdfUtils {
         document.addKeywords("Keywords@iTextpdf");// 关键字
         document.addCreator("Creator@umiz`s");// 创建者
     }
-    /**
-     * 创建单元格(指定字体)
+    /** 创建单元格(指定字体)
      * @param value
      * @param font
      * @return
@@ -187,10 +189,10 @@ public class PdfUtils {
         cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
         cell.setHorizontalAlignment(Element.ALIGN_CENTER);
         cell.setPhrase(new Phrase(value, font));
+        cell.setFixedHeight(40f);
         return cell;
     }
-    /**
-     * 创建单元格（指定字体、水平..）
+    /** 创建单元格（指定字体、水平..）
      * @param value
      * @param font
      * @param align
@@ -203,8 +205,7 @@ public class PdfUtils {
         cell.setPhrase(new Phrase(value, font));
         return cell;
     }
-    /**
-     * 创建单元格（指定字体、水平居..、单元格跨x列合并）
+    /** 创建单元格（指定字体、水平居..、单元格跨x列合并）
      * @param value
      * @param font
      * @param align
@@ -219,8 +220,7 @@ public class PdfUtils {
         cell.setPhrase(new Phrase(value, font));
         return cell;
     }
-    /**
-     * 创建单元格（指定字体、水平居..、单元格跨x列合并、设置单元格内边距）
+    /** 创建单元格（指定字体、水平居..、单元格跨x列合并、设置单元格内边距）
      * @param value
      * @param font
      * @param align
@@ -246,8 +246,7 @@ public class PdfUtils {
         }
         return cell;
     }
-    /**
-     * 创建单元格（指定字体、水平..、边框宽度：0表示无边框、内边距）
+    /** 创建单元格（指定字体、水平..、边框宽度：0表示无边框、内边距）
      * @param value
      * @param font
      * @param align
@@ -276,8 +275,7 @@ public class PdfUtils {
  
  
 /**--------------------------创建表格的方法start------------------- ---------*/
-    /**
-     * 创建默认列宽，指定列数、水平(居中、右、左)的表格
+    /**创建默认列宽，指定列数、水平(居中、右、左)的表格
      * @param colNumber
      * @param align
      * @return
@@ -294,8 +292,7 @@ public class PdfUtils {
         }
         return table;
     }
-    /**
-     * 创建指定列宽、列数的表格
+    /** 创建指定列宽、列数的表格
      * @param widths
      * @return
      */
@@ -311,8 +308,7 @@ public class PdfUtils {
         }
         return table;
     }
-    /**
-     * 创建空白的表格
+    /** 创建空白的表格
      * @return
      */
     public PdfPTable createBlankTable() {

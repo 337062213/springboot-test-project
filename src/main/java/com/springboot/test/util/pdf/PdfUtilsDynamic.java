@@ -3,6 +3,9 @@
 import java.io.File;
 import java.io.FileOutputStream;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.itextpdf.text.Anchor;
 import com.itextpdf.text.Chunk;
 import com.itextpdf.text.Document;
@@ -20,28 +23,34 @@ import com.itextpdf.text.pdf.draw.DottedLineSeparator;
 import com.itextpdf.text.pdf.draw.LineSeparator;
 
 public class PdfUtilsDynamic {
- 
-    // main测试
+    private static Logger logger = LoggerFactory.getLogger(PdfUtilsDynamic.class);
+ // main测试
     public static void main(String[] args) throws Exception {
+            PdfUtilsDynamic pdfUtilsDynamic = new PdfUtilsDynamic();
+            logger.info("生成PDF开始！");
+            String storePath = "C:\\Users\\EDZ\\Desktop\\PDFDemoDynamic.pdf";
+            // 4.向文档中添加内容
+            pdfUtilsDynamic.CreatePdf(storePath);
+            logger.info("生成PDF结束！");
+    }
+    // main测试
+    public void CreatePdf(String storePath) throws Exception {
         try {
             // 1.新建document对象
             Document document = new Document(PageSize.A4);// 建立一个Document对象 
             // 2.建立一个书写器(Writer)与document对象关联
-            File file = new File("C:\\Users\\EDZ\\Desktop\\PDFDemo.pdf");
+            File file = new File(storePath);
             file.createNewFile();
             PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream(file));
             writer.setPageEvent(new Watermark("HELLO ITEXTPDF"));// 水印
             writer.setPageEvent(new MyHeaderFooter());// 页眉/页脚 
             // 3.打开文档
             document.open();
-            document.addTitle("Title@PDF-Java");// 标题
-            document.addAuthor("Author@umiz");// 作者
-            document.addSubject("Subject@iText pdf sample");// 主题
-            document.addKeywords("Keywords@iTextpdf");// 关键字
-            document.addCreator("Creator@umiz`s");// 创建者
-            // 4.向文档中添加内容
+            // 4.添加文档信息
+            addDocumentInfo(document);
+            // 5.向文档中添加内容
             new PdfUtilsDynamic().generatePDF(document);
-            // 5.关闭文档
+            // 6.关闭文档
             document.close();
         } catch (Exception e) {
             e.printStackTrace();
@@ -108,7 +117,7 @@ public class PdfUtilsDynamic {
         // 表格
         PdfPTable table = createTable(new float[] { 40, 120, 120, 120, 80, 80 });
         table.addCell(createCell("美好的一天", headfont, Element.ALIGN_CENTER, 6, false));
-        table.addCell(createCell("早上9:00", keyfont, Element.ALIGN_CENTER));
+        table.addCell(createCell("序号", keyfont, Element.ALIGN_CENTER));
         table.addCell(createCell("中午11:00", keyfont, Element.ALIGN_CENTER));
         table.addCell(createCell("中午13:00", keyfont, Element.ALIGN_CENTER));
         table.addCell(createCell("下午15:00", keyfont, Element.ALIGN_CENTER));
@@ -142,6 +151,18 @@ public class PdfUtilsDynamic {
  
  
 /**------------------------创建表格单元格的方法start----------------------------*/
+    /**创建单元格(指定字体)
+     * @param value
+     * @param font
+     * @return
+     */
+    public void addDocumentInfo(Document document) {
+        document.addTitle("Title@PDF-Java");// 标题
+        document.addAuthor("Author@umiz");// 作者
+        document.addSubject("Subject@iText pdf sample");// 主题
+        document.addKeywords("Keywords@iTextpdf");// 关键字
+        document.addCreator("Creator@umiz`s");// 创建者
+    }
     /**
      * 创建单元格(指定字体)
      * @param value
@@ -153,6 +174,8 @@ public class PdfUtilsDynamic {
         cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
         cell.setHorizontalAlignment(Element.ALIGN_CENTER);
         cell.setPhrase(new Phrase(value, font));
+        //设置行高
+        cell.setFixedHeight(40f);
         return cell;
     }
     /**
