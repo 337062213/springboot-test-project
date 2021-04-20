@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8"> 
+	<title>文件上传和下载</title>
+</head>
+<body>
+<h2>http://localhost:8081/springboot/file/upload</h2>
+<form action='http://localhost:8081/springboot/file/upload' method='post' enctype='multipart/form-data'>
+	<input type='file' name='file'>
+	<button type='submit'>上传</button>
+</form>
+<h2>http://localhost:8081/springboot/file/batch/upload</h2>
+<form action='http://localhost:8081/springboot/file/batch/upload' method='post' enctype='multipart/form-data'>
+	 上传文件1：<input type="file" name="file"><br/>
+	 上传文件2：<input type="file" name="file"><br/>
+	 上传文件3：<input type="file" name="file"><br/>
+	 上传文件4：<input type="file" name="file"><br/>
+	<button type='submit'>上传</button>
+</form>
+<h2>http://localhost:8081/springboot/file/upload1</h2>
+<form action='http://localhost:8081/springboot/file/upload1' method='post' enctype='multipart/form-data'>
+	 上传文件1：<input type="file" name="file"><br/>
+	 上传文件2：<input type="file" name="file"><br/>
+	 上传文件3：<input type="file" name="file"><br/>
+	 上传文件4：<input type="file" name="file"><br/>
+	<button type='submit'>上传</button>
+</form>
+</body>
+</html>
