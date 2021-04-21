@@ -1,12 +1,10 @@
- package com.springboot.test.util.pdf;
+package com.springboot.test.util.pdf;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import com.itextpdf.text.Anchor;
 import com.itextpdf.text.Chunk;
 import com.itextpdf.text.Document;
@@ -25,6 +23,26 @@ import com.itextpdf.text.pdf.draw.LineSeparator;
 
 public class PdfUtils {
     private static Logger logger = LoggerFactory.getLogger(PdfUtils.class);
+    // 定义全局的字体静态变量
+    private static Font titlefont;
+    private static Font headfont;
+    private static Font keyfont;
+    private static Font textfont;
+    private static int tableType = 1;
+    // 最大宽度
+    private static int maxWidth = 520;
+    // 静态代码块
+    static {
+        try {
+            BaseFont bfChinese = BaseFont.createFont("STSong-Light", "UniGB-UCS2-H", BaseFont.NOT_EMBEDDED);
+            titlefont = new Font(bfChinese, 16, Font.BOLD);
+            headfont = new Font(bfChinese, 14, Font.BOLD);
+            keyfont = new Font(bfChinese, 10, Font.BOLD);
+            textfont = new Font(bfChinese, 10, Font.NORMAL);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
     // main测试
     public static void main(String[] args) throws Exception {
             logger.info("生成PDF开始！");
@@ -45,7 +63,7 @@ public class PdfUtils {
             OutputStream outputStream = new FileOutputStream(file);
             PdfWriter writer = PdfWriter.getInstance(document, outputStream);
             writer.setPageEvent(new Watermark("HELLO ITEXTPDF"));// 水印
-            writer.setPageEvent(new MyHeaderFooter());// 页眉/页脚 
+            writer.setPageEvent(new PDFHeaderFooter());// 页眉/页脚 
             // 3.打开文档
             document.open();
             // 4.添加文档信息
@@ -54,27 +72,6 @@ public class PdfUtils {
             generatePDF(document);
             // 6.关闭文档
             document.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
- 
-    // 定义全局的字体静态变量
-    private static Font titlefont;
-    private static Font headfont;
-    private static Font keyfont;
-    private static Font textfont;
-    private static int tableType = 1;
-    // 最大宽度
-    private static int maxWidth = 520;
-    // 静态代码块
-    static {
-        try {
-            BaseFont bfChinese = BaseFont.createFont("STSong-Light", "UniGB-UCS2-H", BaseFont.NOT_EMBEDDED);
-            titlefont = new Font(bfChinese, 16, Font.BOLD);
-            headfont = new Font(bfChinese, 14, Font.BOLD);
-            keyfont = new Font(bfChinese, 10, Font.BOLD);
-            textfont = new Font(bfChinese, 10, Font.NORMAL);
         } catch (Exception e) {
             e.printStackTrace();
         }

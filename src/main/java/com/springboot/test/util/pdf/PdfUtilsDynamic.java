@@ -2,10 +2,8 @@
 
 import java.io.File;
 import java.io.FileOutputStream;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import com.itextpdf.text.Anchor;
 import com.itextpdf.text.Chunk;
 import com.itextpdf.text.Document;
@@ -43,7 +41,7 @@ public class PdfUtilsDynamic {
             file.createNewFile();
             PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream(file));
             writer.setPageEvent(new Watermark("HELLO ITEXTPDF"));// 水印
-            writer.setPageEvent(new MyHeaderFooter());// 页眉/页脚 
+            writer.setPageEvent(new PDFHeaderFooter());// 页眉/页脚 
             // 3.打开文档
             document.open();
             // 4.添加文档信息
@@ -68,13 +66,11 @@ public class PdfUtilsDynamic {
     static {
         try {
             // 不同字体（这里定义为同一种字体：包含不同字号、不同style）
-//            BaseFont bfChinese = BaseFont.createFont("STSong-Light", "UniGB-UCS2-H", BaseFont.NOT_EMBEDDED);
             BaseFont bfChinese = BaseFont.createFont("STSong-Light", "UniGB-UCS2-H", BaseFont.NOT_EMBEDDED);
             titlefont = new Font(bfChinese, 16, Font.BOLD);
             headfont = new Font(bfChinese, 14, Font.BOLD);
             keyfont = new Font(bfChinese, 10, Font.BOLD);
             textfont = new Font(bfChinese, 10, Font.NORMAL);
- 
         } catch (Exception e) {
             e.printStackTrace();
         }

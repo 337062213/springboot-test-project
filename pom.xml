@@ -158,16 +158,26 @@
 		<scope>runtime</scope>
 	</dependency>
 	<dependency>
-         <groupId>net.sf.json-lib</groupId>
-         <artifactId>json-lib</artifactId>
-         <version>2.4</version>
-         <classifier>jdk15</classifier>
-     </dependency>
-	      
-	 <dependency>
+        <groupId>net.sf.json-lib</groupId>
+        <artifactId>json-lib</artifactId>
+        <version>2.4</version>
+        <classifier>jdk15</classifier>
+    </dependency>      
+	<dependency>
 	    <groupId>org.json</groupId>
 	    <artifactId>json</artifactId>
-	    </dependency>
+	</dependency>
+	<!--google二维码相关依赖   如果是非 web 应用则导入 core 包即可，如果是 web 应用，则 core 与 javase 一起导入。-->
+	<dependency>
+	    <groupId>com.google.zxing</groupId>
+	    <artifactId>core</artifactId>
+	    <version>3.3.3</version>
+	</dependency>	 
+	<dependency>
+	    <groupId>com.google.zxing</groupId>
+	    <artifactId>javase</artifactId>
+	    <version>3.3.3</version>
+	</dependency>
   </dependencies>
   
   <build>

@@ -9,5 +9,4 @@ public class SystemProperties {
          for (int i = 0; i < forName.length; i++) //逐行输出
              System.out.println(forName[i]);
      }
-
 }

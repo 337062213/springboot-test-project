@@ -1,7 +1,6 @@
  package com.springboot.test.util.pdf;
 
 import java.io.IOException;
-
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Element;
@@ -22,13 +21,12 @@ import com.itextpdf.text.pdf.PdfWriter;
 /*
  * 页眉/页脚的定义实现类
  */
-public class MyHeaderFooter extends PdfPageEventHelper {
+public class PDFHeaderFooter extends PdfPageEventHelper {
     // 总页数
     PdfTemplate totalPage;
     Font hfFont;
     {
         try {
-//            hfFont = new Font(BaseFont.createFont("STSong-Light", "UniGB-UCS2-H", BaseFont.NOT_EMBEDDED), 8, Font.NORMAL);
               hfFont = new Font(BaseFont.createFont("STSong-Light", "UniGB-UCS2-H", BaseFont.NOT_EMBEDDED), 8, Font.NORMAL);
         } catch (DocumentException e) {
             e.printStackTrace();

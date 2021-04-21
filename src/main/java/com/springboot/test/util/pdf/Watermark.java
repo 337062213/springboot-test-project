@@ -24,11 +24,11 @@ public class Watermark extends PdfPageEventHelper {
         for(int i=0 ; i<5; i++) {
             for(int j=0; j<5; j++) {
                 ColumnText.showTextAligned(writer.getDirectContentUnder(),
-                        Element.ALIGN_CENTER,
-                        new Phrase(this.waterCont == null ? "HELLO WORLD" : this.waterCont, FONT),
-                        (50.5f+i*350),
-                        (40.0f+j*150),
-                        writer.getPageNumber() % 2 == 1 ? 45 : -45);
+                Element.ALIGN_CENTER,
+                new Phrase(this.waterCont == null ? "HELLO WORLD" : this.waterCont, FONT),
+                (50.5f+i*350),
+                (40.0f+j*150),
+                writer.getPageNumber() % 2 == 1 ? 45 : -45);
             }
         }
     }

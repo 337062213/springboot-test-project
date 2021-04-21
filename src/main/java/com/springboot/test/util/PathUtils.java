@@ -2,10 +2,12 @@
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.util.ClassUtils;
 
 public class PathUtils {
-     
+     private static Logger logger = LoggerFactory.getLogger(PathUtils.class);
      public static String getPathByDefaultClassLoader() {
          return ClassUtils.getDefaultClassLoader().getResource("").getPath().replaceFirst("/", "");
      }
@@ -23,8 +25,8 @@ public class PathUtils {
      }
      
      public static void main(String[] args) {
-         System.out.println(PathUtils.getPathByClass());
-         System.out.println(PathUtils.getPathByDefaultClassLoader());
-         System.out.println(PathUtils.getPathByProperty());
+         logger.info(PathUtils.getPathByClass());
+         logger.info(PathUtils.getPathByDefaultClassLoader());
+         logger.info(PathUtils.getPathByProperty());
      }
 }
