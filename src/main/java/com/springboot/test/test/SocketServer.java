@@ -1,9 +1,7 @@
  package com.springboot.test.test;
 
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -113,7 +111,6 @@ public class SocketServer {
            Runnable runnable=()->{
              try {
                // 建立好连接后，从socket中获取输入流，并建立缓冲区进行读取
-               BufferedReader br = new BufferedReader(new InputStreamReader(inputStream));
                byte[] bytes = new byte[1024];
                int len;
                while ((len = inputStream.read(bytes)) != -1) {
