@@ -4,6 +4,7 @@ import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Iterator;
 import javax.imageio.IIOImage;
 import javax.imageio.IIOParamController;
@@ -34,8 +35,9 @@ public class ImageUtils {
 	}
 	
 	public static void main(String[] args) {
-		changeImageFormat("C:\\Users\\Administrator\\Desktop\\test\\sample.jpg","C:\\Users\\Administrator\\Desktop\\test\\","sample-convertor-bpm.bpm");
-		changeImageFormatFromFile("C:\\Users\\Administrator\\Desktop\\test\\sample-tiff.tiff","C:\\Users\\Administrator\\Desktop\\test\\","sample-convertor-tiff-0.5-insert.tiff");
+//		changeImageFormat("C:\\Users\\Administrator\\Desktop\\test\\sample.jpg","C:\\Users\\Administrator\\Desktop\\test\\","sample-convertor-bpm.bpm");
+//		changeImageFormatFromFile("C:\\Users\\Administrator\\Desktop\\test\\sample-tiff.tiff","C:\\Users\\Administrator\\Desktop\\test\\","sample-convertor-tiff-0.5-insert.tiff");
+		getReaderFormatNames();
 	}
 	
     public static void changeImageFormatFromFile(String sourcePath, String targetPath,String name) {
@@ -77,7 +79,7 @@ public class ImageUtils {
 		    		IIOImage second_IIOImage = new IIOImage(second_bi, null, null);
 		            writer.writeInsert(i, second_IIOImage, null);
 				    } else {
-				            System.err.println("Writer can't append a second image!");
+				        logger.error("Writer can't append a second image!");
 				    }
 		    }
 		    
@@ -86,5 +88,11 @@ public class ImageUtils {
 			logger.error(e.getMessage());
 		}
 	}
-
+    public static String getReaderFormatNames() {
+        String readFormats[] = ImageIO.getReaderFormatNames();
+        String writeFormats[] = ImageIO.getWriterFormatNames();
+        logger.info("Readers: : " + Arrays.toString(readFormats));
+        logger.info("Writers: : " + Arrays.toString(writeFormats));
+        return Arrays.toString(readFormats);
+    }
 }

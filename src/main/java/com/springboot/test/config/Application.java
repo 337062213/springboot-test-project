@@ -6,6 +6,8 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.ComponentScan;
 
+import com.spring4all.swagger.EnableSwagger2Doc;
+@EnableSwagger2Doc
 @SpringBootApplication
 @ComponentScan(value="com.springboot.test")
 public class Application extends SpringBootServletInitializer {
