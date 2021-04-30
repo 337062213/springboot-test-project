@@ -22,8 +22,32 @@ public class User implements Serializable {
 	@ApiModelProperty(name = "password", value = "用户密码", example="admin")
 	private String password;
 	
+	
+	public User() {
+        super();
+    }
+	
 
-	public String getId() {
+    public User(String id) {
+        super();
+        this.id = id;
+    }
+
+
+    public User(String id, String name) {
+        super();
+        this.id = id;
+        this.name = name;
+    }
+
+    public User(String id, String name, String password) {
+        super();
+        this.id = id;
+        this.name = name;
+        this.password = password;
+    }
+
+    public String getId() {
         return id;
     }
 
@@ -45,10 +69,6 @@ public class User implements Serializable {
 
 	public void setPassword(String password) {
 		this.password = password;
-	}
-
-	public User() {
-		super();
 	}
 
 	@Override

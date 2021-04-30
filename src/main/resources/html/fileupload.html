@@ -4,6 +4,77 @@
 	<meta charset="utf-8"> 
 	<title>文件上传和下载</title>
 </head>
+<script>
+	function myfun() {
+		var d = new Date();
+	    var t = d.toLocaleTimeString();
+	    document.getElementById("time").innerHTML = t;
+		document.getElementById("time").style.background= "bisque"; // 改变背景颜色
+	}
+	/*用window.onload调用myfun()*/
+	window.onload=myfun;
+	
+	let patt1=new RegExp("best");
+	document.write(patt1.exec("The best things in life are free"));
+	var number = Math.round(Math.random()*500 + 500);
+	var myVar = null, promptValue = "";
+	//有取消按钮
+   	var confirmValue = confirm("Please confirm whether to continue or quit");
+	if(confirmValue){
+		alert(number);
+		if(number>=750){
+			alert("function");
+		    //有取消按钮
+		   	confirm("Confirm");
+		    //弹出输入框
+		   	promptValue = prompt("prompt");
+		   	while("admin"!==promptValue && promptValue!==null){
+		   		promptValue = prompt("prompt");
+		   	}
+			myVar = setInterval(
+					function(){ myTimer() }, 1000
+				);
+		}else{
+			alert("arrow");
+		    //有取消按钮
+		   	confirm("Confirm");
+		    //弹出输入框
+		   	promptValue = prompt("prompt");
+		   	while("admin"!==promptValue && promptValue!==null){
+		    	promptValue = prompt("prompt");
+		    }
+			myVar = setInterval(
+					() => { myTimer() }, 1000
+				);
+		}
+	}
+	function myTimer() {
+	    var d = new Date();
+	    var t = d.toLocaleTimeString();
+	    document.getElementById("time").innerHTML = t;
+	}
+	
+	function pause() {
+	    clearInterval(myVar);
+	    myVar = null;
+	}
+	function start() {
+		myVar = setInterval(function(){ myTimer() }, 1000);
+	}
+</script>
+<p id="writer"></p>
+<div>
+  <marquee direction="left" scrollamount="3" style="width:550px; height:20px" id="marquee">
+    <a href="#">纤云弄巧，飞星传恨，银汉迢迢暗度。</a>
+    <a href="#">金风玉露一相逢，便胜却、人间无数。</a>
+    <a href="#">柔情似水，佳期如梦。忍顾鹊桥归路！</a>
+    <a href="#">两情若是久长时，又岂在、朝朝暮暮。</a>
+    <a href="#">千重劫，百世难，亘古匆匆，弹指间！</a>
+    <a href="#">不死躯，不灭魂，震古烁今，无人敌！</a>
+    <a href="#">待到阴阳逆乱时，以我魔血染青天！</a>
+  </marquee>
+</div>
+<p style="display:inline"><span>显示当前时间:</span><span></span></p><p id="time" style="display:inline;margin-left:10px">"&nbsp;"</p><p style="display:inline;margin-left:10px"><button type='button' onclick='pause()'>暂停</button><button type='button' onclick='start()'>开始</button></p>
 <body>
 <h2>http://localhost:8081/springboot/file/upload</h2>
 <form action='http://localhost:8081/springboot/file/upload' method='post' enctype='multipart/form-data'>

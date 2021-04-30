@@ -2,21 +2,30 @@ package com.springboot.test.util.pdf;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.OutputStream;
+import java.util.Arrays;
+import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import com.itextpdf.text.Anchor;
 import com.itextpdf.text.Chunk;
 import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Element;
 import com.itextpdf.text.Font;
+import com.itextpdf.text.Font.FontFamily;
 import com.itextpdf.text.Image;
 import com.itextpdf.text.PageSize;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.Phrase;
 import com.itextpdf.text.pdf.BaseFont;
+import com.itextpdf.text.pdf.GrayColor;
+import com.itextpdf.text.pdf.PdfCopy;
+import com.itextpdf.text.pdf.PdfImportedPage;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfReader;
 import com.itextpdf.text.pdf.PdfWriter;
 import com.itextpdf.text.pdf.draw.DottedLineSeparator;
 import com.itextpdf.text.pdf.draw.LineSeparator;
@@ -46,10 +55,14 @@ public class PdfUtils {
     // main测试
     public static void main(String[] args) throws Exception {
             logger.info("生成PDF开始！");
-            String storePath = "C:\\Users\\EDZ\\Desktop\\PDFDemo.pdf";
-            // 4.向文档中添加内容
+            String storePath = "C:\\Users\\EDZ\\Desktop\\test\\pdf\\PDFDemo1.pdf";
+            // 1.生成 PDF文件
             CreatePdf(storePath);
             logger.info("生成PDF结束！");
+            // 2.合并 PDF文件
+            String[] files = {"C:\\Users\\EDZ\\Desktop\\test\\pdf\\PDFDemo1.pdf", "C:\\Users\\EDZ\\Desktop\\test\\pdf\\PDFDemo.pdf"};
+            String savepath = "C:\\Users\\EDZ\\Desktop\\test\\pdf\\combinePDFDemo.pdf";
+            mergePdfFiles(Arrays.asList(files), savepath);
     }
  
     // main测试
@@ -108,9 +121,39 @@ public class PdfUtils {
  
         // 添加图片
         Image image = Image.getInstance("https://img-blog.csdn.net/20180801174617455?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zNzg0ODcxMA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70");
+        // 添加图片
+        String sourcePath = "C:\\Users\\EDZ\\Desktop\\test\\qr\\1618989493309.png";
+        Image image2 = Image.getInstance(sourcePath);
+        Image image3 = Image.getInstance(sourcePath);
         image.setAlignment(Image.ALIGN_CENTER);
         image.scalePercent(40); //依照比例缩放
- 
+        PdfPCell cell = new PdfPCell();
+        Font font = new Font(FontFamily.HELVETICA, 12, Font.NORMAL, GrayColor.GRAYWHITE);
+        Paragraph p = new Paragraph("A cell with an image as background color.", font);
+        cell.addElement(p);
+        // 构造图片
+        // 设置CellEvent
+        cell.setCellEvent(new BackgroundEvent(image3));
+        // 按比例设置cell高度
+        cell.setFixedHeight((float)(image.getScaledHeight()/2.5));
+        
+        PdfPCell cell1 = new PdfPCell();
+        // 构造图片
+        // 设置CellEvent
+        cell1.setCellEvent(new BackgroundEvent(image2));
+        // 按比例设置cell高度
+        cell1.setFixedHeight((float)(image.getScaledHeight()/2.5));
+        
+     // 表格
+        PdfPTable table1 = createTable(new float[] { 40, 120, 120, 120, 80, 80 });
+        table1.addCell(createCell("美好的一天", headfont, Element.ALIGN_CENTER, 6, false));
+        table1.addCell(createCell("序号", keyfont, Element.ALIGN_CENTER));
+        table1.addCell(createCell("中午11:00", keyfont, Element.ALIGN_CENTER));
+        table1.addCell(createCell("中午13:00", keyfont, Element.ALIGN_CENTER));
+        table1.addCell(createCell("下午15:00", keyfont, Element.ALIGN_CENTER));
+        table1.addCell(createCell("下午17:00", keyfont, Element.ALIGN_CENTER));
+        table1.addCell(cell);
+        document.add(table1);
         // 表格
         PdfPTable table = createTable(new float[] { 40, 120, 120, 120, 80, 80 });
         table.addCell(createCell("美好的一天", headfont, Element.ALIGN_CENTER, 6, false));
@@ -120,8 +163,9 @@ public class PdfUtils {
         table.addCell(createCell("下午15:00", keyfont, Element.ALIGN_CENTER));
         table.addCell(createCell("下午17:00", keyfont, Element.ALIGN_CENTER));
         table.addCell(createCell("晚上19:00", keyfont, Element.ALIGN_CENTER));
+        table.setHeaderRows(2);
         Integer totalQuantity = 0;
-        for (int i = 0; i < 100; i++) {
+        for (int i = 0; i < 8; i++) {
             table.addCell(createCell("起床", textfont));
             table.addCell(createCell("吃午饭", textfont));
             table.addCell(createCell("午休", textfont));
@@ -200,6 +244,7 @@ public class PdfUtils {
         cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
         cell.setHorizontalAlignment(align);
         cell.setPhrase(new Phrase(value, font));
+        cell.setFixedHeight(40f);
         return cell;
     }
     /** 创建单元格（指定字体、水平居..、单元格跨x列合并）
@@ -317,5 +362,28 @@ public class PdfUtils {
         return table;
     }
 /**--------------------------创建表格的方法end------------------- ---------*/
+ 
+    /** 合并原pdf为新文件
+     * @param files   pdf绝对路径集
+     * @param newfile 新pdf绝对路径
+     * @return
+     * @throws IOException
+     * @throws DocumentException
+     */
+    public static void mergePdfFiles(List<String> files, String newfile) throws IOException, DocumentException {
+        Document document = new Document(new PdfReader(files.get(0)).getPageSize(1));
+        PdfCopy copy = new PdfCopy(document, new FileOutputStream(newfile));
+        document.open();
+        for (int i = 0; i < files.size(); i++) {
+            PdfReader reader = new PdfReader(files.get(i));
+            int n = reader.getNumberOfPages();
+            for (int j = 1; j <= n; j++) {
+                document.newPage();
+                PdfImportedPage page = copy.getImportedPage(reader, j);
+                copy.addPage(page);
+            }
+        }
+        document.close();
+    }
  
 }

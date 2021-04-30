@@ -1,5 +1,6 @@
 package com.springboot.test.util;
 
+import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -28,15 +29,15 @@ public class ImageUtils {
 		File target= new File(targetPath + name);
 		try {
 			BufferedImage bi = ImageIO.read(source);
-			ImageIO.write(bi, "png", target);
+			ImageIO.write(bi, "tiff", target);
 		} catch (IOException e) {
 			logger.error(e.getMessage());
 		}
 	}
 	
 	public static void main(String[] args) {
-//		changeImageFormat("C:\\Users\\Administrator\\Desktop\\test\\sample.jpg","C:\\Users\\Administrator\\Desktop\\test\\","sample-convertor-bpm.bpm");
-//		changeImageFormatFromFile("C:\\Users\\Administrator\\Desktop\\test\\sample-tiff.tiff","C:\\Users\\Administrator\\Desktop\\test\\","sample-convertor-tiff-0.5-insert.tiff");
+		changeImageFormat("C:\\Users\\EDZ\\Desktop\\test\\jpg\\jpg_test1.jpg","C:\\Users\\EDZ\\Desktop\\test\\tiff\\","sample-convertor-bpm.tiff");
+		changeImageFormatFromFile("C:\\Users\\EDZ\\Desktop\\test\\jpg\\jpg_test1.jpg","C:\\Users\\EDZ\\Desktop\\test\\tiff\\","sample-convertor-tiff-0.5-insert.jpg");
 		getReaderFormatNames();
 	}
 	
@@ -47,24 +48,22 @@ public class ImageUtils {
 		
 		try {
 			
-			Iterator<ImageReader> readers = ImageIO.getImageReadersByFormatName("tiff");
+			Iterator<ImageReader> readers = ImageIO.getImageReadersByFormatName("jpg");
 			ImageReader reader = readers.next();
 			ImageInputStream iis = ImageIO.createImageInputStream(source);
 			reader.setInput(iis,true);
-			
-			ImageReadParam readParam = reader.getDefaultReadParam();
-			int imageIndex = 0;
-			int half_width = reader.getHeight(imageIndex)/2;
-			int half_height = reader.getHeight(imageIndex)/2;
+			int half_width = reader.getWidth(0)/2;
+            int half_height = reader.getHeight(0)/2;
+            
+			ImageReadParam readParam = reader.getDefaultReadParam();			
 			Rectangle rect = new Rectangle(0, 0, half_width, half_height); 
 			readParam.setSourceRegion(rect);
 			
 			IIOParamController controller = readParam.getController();
 			if (controller != null) {
 			        controller.activate(readParam);
-			}
-			
-		    Iterator<ImageWriter> writers = ImageIO.getImageWritersByFormatName("tiff");
+			}			
+		    Iterator<ImageWriter> writers = ImageIO.getImageWritersByFormatName("jpg");
 		    ImageWriter writer = writers.next();
 
 		    ImageOutputStream ios = ImageIO.createImageOutputStream(target);
@@ -73,7 +72,7 @@ public class ImageUtils {
 		    BufferedImage first_bi = reader.read(0);
 		    IIOImage first_IIOImage = new IIOImage(first_bi, null, null);
 		    writer.write(null, first_IIOImage, null);
-		    for(int i =1 ; i<5; i++) {
+		    for(int i =0 ; i<5; i++) {
 		    	if (writer.canInsertImage(i)) {
 		    		BufferedImage second_bi = reader.read(i, readParam);
 		    		IIOImage second_IIOImage = new IIOImage(second_bi, null, null);
@@ -94,5 +93,31 @@ public class ImageUtils {
         logger.info("Readers: : " + Arrays.toString(readFormats));
         logger.info("Writers: : " + Arrays.toString(writeFormats));
         return Arrays.toString(readFormats);
+    }
+    
+    public static Image getImageFromLocal(String sourcePath) throws IOException{        
+        File file=new File(sourcePath);
+        Image image=ImageIO.read(file);
+        return image;
+    }
+    public static void getImageFromLocal2() throws IOException{
+        
+        File file=new File("zp2.png");
+        Image im=ImageIO.read(file);
+        int w=im.getWidth(null);
+        int h=im.getHeight(null);
+        BufferedImage b=new BufferedImage(im.getWidth(null), im.getHeight(null), BufferedImage.TYPE_INT_RGB);
+         b.getGraphics().drawImage(im.getScaledInstance(w,h, Image.SCALE_SMOOTH), 
+                    0, 0, null); 
+         BufferedImage b2=new BufferedImage(im.getWidth(null), im.getHeight(null), BufferedImage.TYPE_INT_RGB);
+         b2.getGraphics().drawImage(im.getScaledInstance(w,h, Image.SCALE_SMOOTH), 
+                    0, 0, null); 
+         for(int x=0;x<h;x++)
+            for(int y=0;y<w;y++)
+            {
+                int rgb=b.getRGB(y, x);
+                b2.setRGB(w-1-y, x, rgb);
+            }
+        ImageIO.write(b2, "png", new File("4.png"));  
     }
 }
