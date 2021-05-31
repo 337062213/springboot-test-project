@@ -1,6 +1,9 @@
-package com.springboot.test.model;
+package com.springboot.test.model.api;
 
 import java.io.Serializable;
+import java.util.Date;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -21,6 +24,19 @@ public class User implements Serializable {
 	
 	@ApiModelProperty(name = "password", value = "用户密码", example="admin")
 	private String password;
+	
+    private Integer age;
+    
+    private String sex;
+    
+    private String address;
+
+    private String gid;
+    
+    @JsonFormat(timezone="GMT+8", pattern="yyyy-MM-dd HH:mm:ss")
+    private Date creatTime; 
+    @JsonFormat(timezone="GMT+8", pattern="yyyy-MM-dd HH:mm:ss")
+    private Date updateTime;
 	
 	
 	public User() {
@@ -71,7 +87,67 @@ public class User implements Serializable {
 		this.password = password;
 	}
 
-	@Override
+	public Integer getAge() {
+        return age;
+    }
+
+
+    public void setAge(Integer age) {
+        this.age = age;
+    }
+
+
+    public String getSex() {
+        return sex;
+    }
+
+
+    public void setSex(String sex) {
+        this.sex = sex;
+    }
+
+
+    public String getAddress() {
+        return address;
+    }
+
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+
+    public String getGid() {
+        return gid;
+    }
+
+
+    public void setGid(String gid) {
+        this.gid = gid;
+    }
+
+
+    public Date getCreatTime() {
+        return creatTime;
+    }
+
+
+    public void setCreatTime(Date creatTime) {
+        this.creatTime = creatTime;
+    }
+
+
+    public Date getUpdateTime() {
+        return updateTime;
+    }
+
+
+    public void setUpdateTime(Date updateTime) {
+        this.updateTime = updateTime;
+    }
+
+
+    @Override
 	public String toString() {
 		return "User [name=" + name + ", password=" + password + "]";
 	}

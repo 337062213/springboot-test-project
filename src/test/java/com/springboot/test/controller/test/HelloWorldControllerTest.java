@@ -18,7 +18,7 @@ import org.springframework.web.context.WebApplicationContext;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
-import com.springboot.test.model.User;
+import com.springboot.test.model.api.User;
 
  
 @RunWith(SpringJUnit4ClassRunner.class)

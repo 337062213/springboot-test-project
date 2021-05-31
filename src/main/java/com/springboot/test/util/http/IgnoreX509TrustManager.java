@@ -1,4 +1,4 @@
- package com.springboot.test.service;
+ package com.springboot.test.util.http;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -39,7 +39,7 @@ public class IgnoreX509TrustManager implements X509TrustManager {
                 return true;
             }
         };
-        //之后任何Https协议网站皆能正常访问，同第一种情况
+        //Https协议网站皆能正常访问，同第一种情况
         HttpsURLConnection conn = (HttpsURLConnection) serverUrl.openConnection();
 //        HttpsURLConnection.setDefaultHostnameVerifier(ignoreHostnameVerifier);
 //        HttpsURLConnection.setDefaultSSLSocketFactory(sslcontext.getSocketFactory());

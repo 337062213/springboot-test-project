@@ -206,7 +206,39 @@
 	<dependency>
 	    <groupId>org.codehaus.groovy</groupId>
 	    <artifactId>groovy-all</artifactId>
-	  </dependency>
+	</dependency>
+	<!-- httpClient4.5.3 -->
+	<dependency>
+        <groupId>org.apache.httpcomponents</groupId>
+        <artifactId>httpcore</artifactId>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/org.apache.httpcomponents/httpclient -->
+    <dependency>
+        <groupId>org.apache.httpcomponents</groupId>
+        <artifactId>httpclient</artifactId>
+    </dependency>
+    <!-- httpClient3.1 -->
+    <dependency>
+	  <groupId>commons-httpclient</groupId>
+	  <artifactId>commons-httpclient</artifactId>
+	  <version>3.1</version>
+	</dependency>
+	<dependency>
+		<groupId>org.mybatis.spring.boot</groupId>
+		<artifactId>mybatis-spring-boot-starter</artifactId>
+		<version>2.0.1</version>
+	</dependency>
+	<!-- mysql 数据库 -->
+	<dependency>
+		<groupId>mysql</groupId>
+		<artifactId>mysql-connector-java</artifactId>
+		<scope>runtime</scope>
+	</dependency>
+	<dependency>
+	    <groupId>org.jasypt</groupId>
+	    <artifactId>jasypt</artifactId>
+	    <version>1.9.3</version>
+	</dependency>
   </dependencies>
   
   <build>

@@ -1,12 +1,19 @@
  package com.springboot.test.util;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.ObjectOutputStream;
+import java.io.Reader;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
-
-import net.sf.json.JSONObject;
+import com.alibaba.fastjson.JSONObject;
 
 public class JsonUtil {
      
@@ -14,7 +21,7 @@ public class JsonUtil {
          if(source.indexOf(":") == -1){
              return true;
          }
-         JSONObject fromObject = JSONObject.fromObject(source);
+         net.sf.json.JSONObject fromObject = net.sf.json.JSONObject.fromObject(source);
          @SuppressWarnings("unchecked")
          Iterator<String> keys = fromObject.keys();
          while(keys.hasNext()){
@@ -55,7 +62,7 @@ public class JsonUtil {
          return false;
      }
      
-     public static void main(String[] args) throws IOException {
+     public static void main1(String[] args) throws IOException {
          
          String test = "{\r\n" + 
              "    \"北京\": [\r\n" + 
@@ -546,5 +553,62 @@ public class JsonUtil {
              System.out.println(key+":"+val.toString());
          }
      }
-
+     
+     //read from json file
+     public static String readJsonFromFile(String fileName) {
+         String jsonStr = "";
+         try {
+             File jsonFile = new File(fileName);
+             FileReader fileReader = new FileReader(jsonFile);
+             Reader reader = new InputStreamReader(new FileInputStream(jsonFile),"UTF-8");
+             int ch = 0;
+             StringBuffer sb = new StringBuffer();
+             while ((ch = reader.read()) != -1) {
+                 sb.append((char) ch);
+             }
+             fileReader.close();
+             reader.close();
+             jsonStr = sb.toString();
+             return jsonStr;
+         } catch (IOException e) {
+             e.printStackTrace();
+             return null;
+         }
+     }
+     //read to json file
+     public static void writeObject(String fileName, Object content) throws IOException {
+         FileOutputStream outStream = null;
+         ObjectOutputStream objectOutputStream = null;
+         try {
+             outStream = new FileOutputStream(fileName);
+             objectOutputStream = new ObjectOutputStream(outStream);
+             objectOutputStream.writeObject(content);
+             objectOutputStream.close();
+             outStream.close();
+         } catch (FileNotFoundException e) {
+             e.printStackTrace();
+         } catch (IOException e) {
+             e.printStackTrace();
+         }finally{ 
+             objectOutputStream.close();
+             outStream.close();
+         }
+     }
+     public static void main(String[] args) {
+         String path = System.getProperty("user.dir");
+         String filePathFrom = path+File.separator+"src/main/resources/json/country.json";
+         String filePathTo = path+File.separator+"src/main/resources/json/guojia.json";
+         String s = readJsonFromFile(filePathFrom);
+         JSONObject jobj = JSONObject.parseObject(s);
+         JSONObject newJson = new JSONObject();
+         for (Map.Entry<String, Object> entry : jobj.entrySet()){
+             System.out.println(entry.getKey()+":"+entry.getValue());
+             newJson.put(entry.getValue().toString(), entry.getKey());
+         }
+         try {
+            writeObject(filePathTo, newJson);
+        } catch (IOException e) {
+             e.printStackTrace();
+        }
+     }
 }

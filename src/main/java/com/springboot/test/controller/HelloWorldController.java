@@ -11,7 +11,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import com.springboot.test.model.Data;
-import com.springboot.test.model.User;
+import com.springboot.test.model.api.User;
+
 import io.swagger.annotations.ApiOperation;
 
 @RestController

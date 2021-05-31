@@ -10,7 +10,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 import java.util.stream.Collectors;
-import com.springboot.test.model.User;
+
+import com.springboot.test.model.api.User;
+
 import groovy.lang.GroovyClassLoader;
 
 public class Reflect {
