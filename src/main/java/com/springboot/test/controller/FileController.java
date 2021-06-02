@@ -7,6 +7,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.net.URLEncoder;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
 import java.util.ArrayList;
@@ -22,11 +23,13 @@ import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -349,4 +352,46 @@ import com.springboot.test.util.ZipUtils;
          }
          return dir;
      }
+
+         @GetMapping("/download/file")
+         public void downloadPattern(HttpServletRequest request, HttpServletResponse response){
+             System.out.println("开始下载文件.....");
+             ClassPathResource resource = new ClassPathResource("\\html\\fileupload.html");
+             try {
+                 //获取文件输入流
+                 InputStream in = resource.getInputStream();
+                 //下载文件
+                 downFile("fileupload.html",request,response,in);
+             } catch (IOException e) {
+                 e.printStackTrace();
+             }
+         }
+
+
+         /**下载文件
+          * @param fileName 下载文件名称
+          * @param response 响应
+          * @throws IOException 异常
+          */
+         public static void downFile(String fileName,HttpServletRequest request,
+                                     HttpServletResponse response,InputStream in) throws IOException {
+             //输出流自动关闭，java1.7新特性
+             try(OutputStream os = response.getOutputStream()) {
+                 fileName = URLEncoder.encode(fileName, "UTF-8");
+                 response.reset();
+                 response.setHeader("Content-Disposition", "attachment; filename=" + fileName);
+                 response.setContentType("application/octet-stream; charset=UTF-8");
+                 byte[] b = new byte[in.available()];
+                 in.read(b);
+                 os.write(b);
+                 os.flush();
+             } catch (Exception e) {
+                 System.out.println("fileName=" + fileName);
+                 e.printStackTrace();
+             } finally {
+                 if (in != null) {
+                     in.close();
+                 }
+             }
+         }
  }
