@@ -37,9 +37,21 @@ public class User implements Serializable {
     private Date creatTime; 
     @JsonFormat(timezone="GMT+8", pattern="yyyy-MM-dd HH:mm:ss")
     private Date updateTime;
+    
+    private transient String unicode;
+    	
 	
-	
-	public User() {
+	public String getUnicode() {
+        return unicode;
+    }
+
+
+    public void setUnicode(String unicode) {
+        this.unicode = unicode;
+    }
+
+
+    public User() {
         super();
     }
 	
