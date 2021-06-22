@@ -2,7 +2,7 @@ package com.springboot.test.service.impl;
 
 import com.springboot.test.mapper.UserMapper;
 import com.springboot.test.model.Page;
-import com.springboot.test.model.api.User;
+import com.springboot.test.model.po.User;
 import com.springboot.test.model.vo.UserGroupVo;
 import com.springboot.test.service.IUserService;
 

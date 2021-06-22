@@ -5,7 +5,7 @@ import org.apache.ibatis.jdbc.SQL;
 import org.springframework.util.StringUtils;
 
 import com.springboot.test.model.Page;
-import com.springboot.test.model.api.User;
+import com.springboot.test.model.po.User;
 import com.springboot.test.model.vo.UserGroupVo;
 
 import java.util.List;

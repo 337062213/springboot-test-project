@@ -29,9 +29,9 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
-import com.springboot.test.consistant.DirectoryConst;
 import com.springboot.test.helper.SAXParserHandler;
 import com.springboot.test.model.Book;
+import com.springboot.test.model.consistant.DirectoryConst;
 
 public class XMLUtils {
      

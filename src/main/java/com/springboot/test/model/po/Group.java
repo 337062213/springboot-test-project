@@ -1,4 +1,4 @@
-package com.springboot.test.model.api;
+package com.springboot.test.model.po;
 
 import java.util.Date;
 

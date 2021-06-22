@@ -1,7 +1,7 @@
 package com.springboot.test.service.impl;
 
 import com.springboot.test.mapper.GroupMapper;
-import com.springboot.test.model.api.Group;
+import com.springboot.test.model.po.Group;
 import com.springboot.test.model.vo.GroupUserVo;
 import com.springboot.test.service.IGroupService;
 

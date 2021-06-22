@@ -15,11 +15,11 @@
  import com.itextpdf.text.pdf.PdfPTable;
  import com.itextpdf.text.pdf.PdfWriter;
   
- public class TestExportPdf {
+ public class ExportPdf {
   
      public static void main(String[] args) throws Exception {
          
-         FileOutputStream fos = new FileOutputStream("C:\\Users\\EDZ\\Desktop\\test\\jpg/table8.pdf");
+         FileOutputStream fos = new FileOutputStream("C:\\Users\\EDZ\\Desktop\\test\\pdf\\exportPDF.pdf");
          Document document = new Document();
          PdfWriter writer = PdfWriter.getInstance(document, fos);
          writer.setViewerPreferences(PdfWriter.PageModeUseThumbs);
@@ -77,7 +77,7 @@
          }
           
          //单元格插入图片
-         byte[] bt = FileUtils.readFileToByteArray(new File("C:\\Users\\EDZ\\Desktop\\test\\jpg/电机—jpg_test.jpg"));
+         byte[] bt = FileUtils.readFileToByteArray(new File("C:\\Users\\EDZ\\Desktop\\test\\jpg\\电机—jpg_test.jpg"));
          PdfPCell pdfCell = new PdfPCell();
          pdfCell.setImage(Image.getInstance(bt));
          table.addCell(pdfCell);

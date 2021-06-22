@@ -1,4 +1,4 @@
- package com.springboot.test.consistant;
+ package com.springboot.test.model.consistant;
 
  public class DirectoryConst {
      

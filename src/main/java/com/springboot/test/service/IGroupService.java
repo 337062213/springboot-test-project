@@ -2,7 +2,7 @@ package com.springboot.test.service;
 
 import java.util.List;
 
-import com.springboot.test.model.api.Group;
+import com.springboot.test.model.po.Group;
 import com.springboot.test.model.vo.GroupUserVo;
 
 public interface IGroupService {

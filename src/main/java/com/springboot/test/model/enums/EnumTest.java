@@ -1,4 +1,4 @@
-package com.springboot.test.error;
+package com.springboot.test.model.enums;
 
 public class EnumTest {  
 	
@@ -35,19 +35,14 @@ public class EnumTest {
         WINTER  
     }  
 
-    private enum TYPE {  
-    	
+    private enum TYPE {      	
         FIREWALL("firewall"),  
         SECRET("secretMac"),  
-        BALANCE("f5");  
-  
-        private String typeName;  
-  
+        BALANCE("f5");    
+        private String typeName;   
         TYPE(String typeName) {  
             this.typeName = typeName;  
-        }  
-        
-        
+        }                 
         public static TYPE fromTypeName(String typeName) {  
             for (TYPE type : TYPE.values()) {  
                 if (type.getTypeName().equals(typeName)) {  
@@ -60,7 +55,5 @@ public class EnumTest {
         public String getTypeName() {  
             return this.typeName;  
         }  
-    } 
-    
-    
+    }    
 }  

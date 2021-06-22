@@ -144,7 +144,7 @@ public class PdfUtils {
         // 按比例设置cell高度
         cell1.setFixedHeight((float)(image.getScaledHeight()/2.5));
         
-     // 表格
+       // 表格
         PdfPTable table1 = createTable(new float[] { 40, 120, 120, 120, 80, 80 });
         table1.addCell(createCell("美好的一天", headfont, Element.ALIGN_CENTER, 6, false));
         table1.addCell(createCell("序号", keyfont, Element.ALIGN_CENTER));
@@ -192,7 +192,8 @@ public class PdfUtils {
  
  
 /**------------------------创建表格单元格的方法start----------------------------*/
-    /**创建单元格(指定字体)
+    /**
+     * @description 创建单元格(指定字体)
      * @param value
      * @param font
      * @return
@@ -208,7 +209,8 @@ public class PdfUtils {
         }
         return newDocument;
     }
-    /**创建单元格(指定字体)
+    /**
+     * @description 创建单元格(指定字体)
      * @param value
      * @param font
      * @return
@@ -288,7 +290,8 @@ public class PdfUtils {
         }
         return cell;
     }
-    /** 创建单元格（指定字体、水平..、边框宽度：0表示无边框、内边距）
+    /** 
+     * @description 创建单元格（指定字体、水平..、边框宽度：0表示无边框、内边距）
      * @param value
      * @param font
      * @param align
@@ -317,7 +320,8 @@ public class PdfUtils {
  
  
 /**--------------------------创建表格的方法start------------------- ---------*/
-    /**创建默认列宽，指定列数、水平(居中、右、左)的表格
+    /**
+     * @description 创建默认列宽，指定列数、水平(居中、右、左)的表格
      * @param colNumber
      * @param align
      * @return
@@ -334,7 +338,8 @@ public class PdfUtils {
         }
         return table;
     }
-    /** 创建指定列宽、列数的表格
+    /** 
+     * @description 创建指定列宽、列数的表格
      * @param widths
      * @return
      */
@@ -350,8 +355,9 @@ public class PdfUtils {
         }
         return table;
     }
-    /** 创建空白的表格
-     * @return
+    /** 
+     * @description 创建空白的表格
+     * @return PdfPTable
      */
     public PdfPTable createBlankTable() {
         PdfPTable table = new PdfPTable(1);
@@ -363,10 +369,10 @@ public class PdfUtils {
     }
 /**--------------------------创建表格的方法end------------------- ---------*/
  
-    /** 合并原pdf为新文件
+    /** 
+     * @description 合并原pdf为新文件
      * @param files   pdf绝对路径集
      * @param newfile 新pdf绝对路径
-     * @return
      * @throws IOException
      * @throws DocumentException
      */

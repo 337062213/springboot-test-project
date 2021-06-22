@@ -1,6 +1,6 @@
 package com.springboot.test.mapper;
 
-import com.springboot.test.model.api.Group;
+import com.springboot.test.model.po.Group;
 import com.springboot.test.model.vo.GroupUserVo;
 
 import java.util.List;

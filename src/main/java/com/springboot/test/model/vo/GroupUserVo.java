@@ -2,7 +2,7 @@ package com.springboot.test.model.vo;
 
 import java.util.List;
 
-import com.springboot.test.model.api.User;
+import com.springboot.test.model.po.User;
 
 public class GroupUserVo {
 

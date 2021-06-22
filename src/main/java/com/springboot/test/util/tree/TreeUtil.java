@@ -3,6 +3,8 @@ package com.springboot.test.util.tree;
 import org.springframework.util.CollectionUtils;
 import com.springboot.test.model.BaseTree;
 import com.springboot.test.model.DefaultTree;
+import com.springboot.test.model.Tree;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -10,13 +12,13 @@ import java.util.Map;
 
 public class TreeUtil {
     
-    /**格式化list为树形list
+    /** transfer List<T> to  Tree
      * @param list 需要格式化的list
      * @param flag true 表示全部展开，其他 表示不展开
      * @param <T> 格式化的实体对象
-     * @return 格式化之后的list
+     * @return Tree 格式化之后的list
      */
-    public static <T extends com.springboot.test.model.Tree> List<T> formatTree(List<T> list, Boolean flag) {
+    public static <T extends Tree> List<T> formatTree(List<T> list, Boolean flag) {
 
         List<T> nodeList = new ArrayList<T>();  
         for(T node1 : list){  
