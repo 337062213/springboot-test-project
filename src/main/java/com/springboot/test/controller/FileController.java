@@ -209,7 +209,7 @@ import com.springboot.test.util.ZipUtils;
      }
      
      @RequestMapping (value= "/batch/upload" , method= RequestMethod.POST) 
-     public @ResponseBody String batchFileUpload(HttpServletRequest request){ 
+     public String batchFileUpload(HttpServletRequest request){ 
          String filePath = PathUtils.getPathByProperty() + this.uploadFilePath;
          List<MultipartFile> files = ((MultipartHttpServletRequest)request).getFiles( "file" ); 
          MultipartFile file =  null ;
@@ -353,45 +353,44 @@ import com.springboot.test.util.ZipUtils;
          return dir;
      }
 
-         @GetMapping("/download/file")
-         public void downloadPattern(HttpServletRequest request, HttpServletResponse response){
-             System.out.println("开始下载文件.....");
-             ClassPathResource resource = new ClassPathResource("\\html\\fileupload.html");
-             try {
-                 //获取文件输入流
-                 InputStream in = resource.getInputStream();
-                 //下载文件
-                 downFile("fileupload.html",request,response,in);
-             } catch (IOException e) {
-                 e.printStackTrace();
-             }
+     @GetMapping("/download/file")
+     public void downloadPattern(HttpServletResponse response){
+         System.out.println("开始下载文件.....");
+         ClassPathResource resource = new ClassPathResource("\\html\\fileupload.html");
+         try {
+             //获取文件输入流
+             InputStream in = resource.getInputStream();
+             //下载文件
+             downFile("fileupload.html",response,in);
+         } catch (IOException e) {
+             e.printStackTrace();
          }
+     }
 
 
-         /**下载文件
-          * @param fileName 下载文件名称
-          * @param response 响应
-          * @throws IOException 异常
-          */
-         public static void downFile(String fileName,HttpServletRequest request,
-                                     HttpServletResponse response,InputStream in) throws IOException {
-             //输出流自动关闭，java1.7新特性
-             try(OutputStream os = response.getOutputStream()) {
-                 fileName = URLEncoder.encode(fileName, "UTF-8");
-                 response.reset();
-                 response.setHeader("Content-Disposition", "attachment; filename=" + fileName);
-                 response.setContentType("application/octet-stream; charset=UTF-8");
-                 byte[] b = new byte[in.available()];
-                 in.read(b);
-                 os.write(b);
-                 os.flush();
-             } catch (Exception e) {
-                 System.out.println("fileName=" + fileName);
-                 e.printStackTrace();
-             } finally {
-                 if (in != null) {
-                     in.close();
-                 }
+     /**下载文件
+      * @param fileName 下载文件名称
+      * @param response 响应
+      * @throws IOException 异常
+      */
+     public static void downFile(String fileName,HttpServletResponse response,InputStream in) throws IOException {
+         //输出流自动关闭，java1.7新特性
+         try(OutputStream os = response.getOutputStream()) {
+             fileName = URLEncoder.encode(fileName, "UTF-8");
+             response.reset();
+             response.setHeader("Content-Disposition", "attachment; filename=" + fileName);
+             response.setContentType("application/octet-stream; charset=UTF-8");
+             byte[] b = new byte[in.available()];
+             in.read(b);
+             os.write(b);
+             os.flush();
+         } catch (Exception e) {
+             System.out.println("fileName=" + fileName);
+             e.printStackTrace();
+         } finally {
+             if (in != null) {
+                 in.close();
              }
          }
+     }
  }

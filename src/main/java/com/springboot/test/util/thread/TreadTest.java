@@ -1,10 +1,15 @@
  package com.springboot.test.util.thread;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.ThreadFactory;
+
+import com.google.common.util.concurrent.ThreadFactoryBuilder;
 import com.springboot.test.util.DateUtils;
 
 public class TreadTest {
@@ -70,7 +75,10 @@ public class TreadTest {
         producerLatch = new CountDownLatch(1);
         consumerLatch = new CountDownLatch(1);
         int coreNumber = Runtime.getRuntime().availableProcessors();
-        ExecutorService pool = Executors.newFixedThreadPool(coreNumber);
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        String date = df.format(new Date());
+        ThreadFactory threadFactory = new ThreadFactoryBuilder().setNameFormat("thread-pool-%d-"+date).build();
+        ExecutorService pool = Executors.newFixedThreadPool(coreNumber,threadFactory);
         pool.execute(new ProducerTask(queue,producerLatch));
         try {
             producerLatch.await();

@@ -4,30 +4,19 @@ import java.io.IOException;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
 import java.util.stream.Collectors;
-
 import com.springboot.test.model.po.User;
-
 import groovy.lang.GroovyClassLoader;
 
 public class Reflect {
     
      public static void main(String[] args) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException, InstantiationException, NoSuchMethodException, SecurityException, IOException, NoSuchFieldException{
-         List<User> userList = new ArrayList<>();
          new User("1","a","1111");
          new User("1","b","2222");
          new User("2","c","3333");
-         new User("3","d","4444");
-         //
-         Map<String, String> collect = userList.stream().collect(Collectors.toMap(User::getId, User::getName, (n1, n2) -> n1 + n2));      
-         //
-         TreeMap<String, String> collect1 = userList.stream().collect(Collectors.toMap(User::getId, User::getName, (n1, n2) -> n1, TreeMap::new));   
-         
+         new User("3","d","4444");         
          GroovyClassLoader groovyClassLoader = new GroovyClassLoader();
          //里面的文本是Java代码,但是我们可以看到这是一个字符串我们可以直接生成对应的Class<?>对象,而不需要我们写一个.java文件
          Class<?> clazz = groovyClassLoader.parseClass("package com.xxl.job.core.glue;\n" +

@@ -1,4 +1,4 @@
- package com.springboot.test.encrypt;
+ package com.springboot.test.util.encrypt;
 
  import org.jasypt.encryption.pbe.PooledPBEStringEncryptor;
  import org.jasypt.encryption.pbe.StandardPBEByteEncryptor;

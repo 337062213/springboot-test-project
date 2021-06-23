@@ -150,7 +150,8 @@
          HSSFFont ParamFontStyle = wb.createFont();
          cellParamStyle.setAlignment(HorizontalAlignment.CENTER);
          cellParamStyle.setVerticalAlignment(VerticalAlignment.CENTER);
-         ParamFontStyle.setColor(HSSFColorPredefined.DARK_RED.getIndex());   //设置字体颜色 (红色)
+         //设置字体颜色 (红色)
+         ParamFontStyle.setColor(HSSFColorPredefined.DARK_RED.getIndex());   
          ParamFontStyle.setFontHeightInPoints((short) this.fontSize);
          cellParamStyle.setFont(ParamFontStyle);
          //设置每格数据的样式2（字体蓝色）
@@ -158,7 +159,8 @@
          cellParamStyle2.setAlignment(HorizontalAlignment.CENTER);
          cellParamStyle2.setVerticalAlignment(VerticalAlignment.CENTER);
          HSSFFont ParamFontStyle2 = wb.createFont();
-         ParamFontStyle2.setColor(HSSFColorPredefined.BLUE.getIndex());   //设置字体颜色 (蓝色)
+         //设置字体颜色 (蓝色)
+         ParamFontStyle2.setColor(HSSFColorPredefined.BLUE.getIndex());
          ParamFontStyle2.setFontHeightInPoints((short) this.fontSize);
          cellParamStyle2.setFont(ParamFontStyle2);
          //开始写入实体数据信息

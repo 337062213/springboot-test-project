@@ -18,7 +18,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import com.springboot.test.annotation.Secret;
-import com.springboot.test.encrypt.AESUtils;
+import com.springboot.test.util.encrypt.AESUtils;
+
 import groovy.util.logging.Slf4j;
 
  @Aspect

@@ -1,4 +1,4 @@
- package com.springboot.test.encrypt;
+ package com.springboot.test.util.encrypt;
 
 import java.security.InvalidKeyException;
 import java.security.Key;
