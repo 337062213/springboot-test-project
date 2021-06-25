@@ -25,7 +25,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/servlet")
+@RequestMapping("/upload")
 public class UploadHandleServlet extends HttpServlet {
     
      private static final long serialVersionUID = 2062541379228765024L;

@@ -1,4 +1,4 @@
-package com.springboot.test.mapper;
+package com.springboot.test.mapper.two;
 
 import com.springboot.test.model.po.Group;
 import com.springboot.test.model.vo.GroupUserVo;
@@ -17,7 +17,7 @@ import org.apache.ibatis.annotations.Many;
 import org.apache.ibatis.mapping.FetchType;
 
 @Mapper
-public interface GroupMapper {
+public interface GroupMapper2 {
     
     @Insert("insert into p_group(id, name, creatTime, updateTime) values(#{id}, #{groupName}, #{creatTime}, #{updateTime})")
     void insertGroup(Group group);

@@ -73,6 +73,7 @@ public class SocketServer {
      public static void main1(String args[]) throws IOException {
          // 监听指定的端口
          int port = 8088;
+         @SuppressWarnings("resource")
          ServerSocket server = new ServerSocket(port);
          // server将一直等待连接的到来
          System.out.println("server将一直等待连接的到来");
@@ -97,6 +98,7 @@ public class SocketServer {
      public static void main(String args[]) throws Exception {
          // 监听指定的端口
          int port = 8088;
+         @SuppressWarnings("resource")
          ServerSocket server = new ServerSocket(port);
          // server将一直等待连接的到来
          System.out.println("server将一直等待连接的到来");

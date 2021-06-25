@@ -1,14 +1,12 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
  <html>
    <head>
-     <title>下载文件显示页面</title>
-  </head>
-   
+     <title>展示</title>
+   </head>  
    <body>
-      <!-- 遍历Map集合 -->
      <c:forEach var="me" items="${fileMap}">
          <c:url value="/servlet/downLoadServlet" var="downurl">
              <c:param name="filename" value="${me.key}"></c:param>

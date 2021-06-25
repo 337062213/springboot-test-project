@@ -1,0 +1,37 @@
+
+#logging.config=classpath:log4j.xml
+    
+# 是否开启加密
+isSecret: true
+#日志  
+logging:
+  file: "C:/Users/EDZ/git/springboot-test/springboot-test-project/log/dev/dev.log"
+  pattern:
+    level: "%5p"
+    file: "%date %-5level [%thread] %logger{0} [%file:%line] - %msg%n"
+    console: "%date %-5level %logger{0} - %msg%n"
+# 文件上传下载配置
+file:
+  dowmload:
+    fileDirectory: "/src/main/resources/file"
+  upload:
+    fileDirectory: "/src/main/resources/file"
+server:  port: 8081
+# 数据库配置
+spring:
+  jpa:
+    show-sql: true
+  datasource:
+    one:
+      jdbc-url:jdbc:postgresql://localhost:5432/postgres?useSSL=false
+      driver-class-name:org.postgresql.Driver
+      username:ENC(bgycBQxsrtvJcyqyUmOeUixA2hZdCOVX)
+      password:ENC(9XNfyAmJJD6IfFnDg3nrsA==)
+    two:
+                      # 方式一：  引用外部文件
+      #jdbc-url: jdbc:sqlite:D:/eclipse/xy.db
+                     #方式二： 引用项目中的文件
+      jdbc-url:jdbc:sqlite::resource:db/sqlite/user.db?useSSL=false
+      driver-class-name:org.sqlite.JDBC
+      username:ENC(bgycBQxsrtvJcyqyUmOeUixA2hZdCOVX)
+      password:ENC(9XNfyAmJJD6IfFnDg3nrsA==)

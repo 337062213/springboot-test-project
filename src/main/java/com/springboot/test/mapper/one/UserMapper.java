@@ -1,4 +1,4 @@
-package com.springboot.test.mapper;
+package com.springboot.test.mapper.one;
 
 import org.apache.ibatis.annotations.*;
 import org.apache.ibatis.jdbc.SQL;

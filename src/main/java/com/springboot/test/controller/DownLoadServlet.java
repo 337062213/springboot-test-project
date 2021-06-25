@@ -14,10 +14,16 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+@Controller
+@RequestMapping("/upload")
 public class DownLoadServlet extends HttpServlet{
 
      private static final long serialVersionUID = -8652981711630952290L;
      
+     @RequestMapping("/download1")
      protected void doPostWithChannel(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
          //得到要下载的文件名
          String fileName = request.getParameter("filename");
@@ -64,6 +70,8 @@ public class DownLoadServlet extends HttpServlet{
           fos.close();
      }
 
+     @RequestMapping("/download2")
+     @Override
      protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
          //得到要下载的文件名
          String fileName = request.getParameter("filename");
@@ -101,6 +109,7 @@ public class DownLoadServlet extends HttpServlet{
      }
      
      @Override
+     @RequestMapping("/download3")
      protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
          doPost(request, response);
      }
