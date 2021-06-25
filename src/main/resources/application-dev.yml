@@ -23,15 +23,14 @@ spring:
     show-sql: true
   datasource:
     one:
-      jdbc-url:jdbc:postgresql://localhost:5432/postgres?useSSL=false
-      driver-class-name:org.postgresql.Driver
-      username:ENC(bgycBQxsrtvJcyqyUmOeUixA2hZdCOVX)
-      password:ENC(9XNfyAmJJD6IfFnDg3nrsA==)
-    two:
-                      # 方式一：  引用外部文件
-      #jdbc-url: jdbc:sqlite:D:/eclipse/xy.db
-                     #方式二： 引用项目中的文件
-      jdbc-url:jdbc:sqlite::resource:db/sqlite/user.db?useSSL=false
-      driver-class-name:org.sqlite.JDBC
-      username:ENC(bgycBQxsrtvJcyqyUmOeUixA2hZdCOVX)
-      password:ENC(9XNfyAmJJD6IfFnDg3nrsA==)
+      jdbc-url: jdbc:postgresql://localhost:5432/postgres
+      driver-class-name: org.postgresql.Driver
+      username: ENC(bgycBQxsrtvJcyqyUmOeUixA2hZdCOVX)
+      password: ENC(9XNfyAmJJD6IfFnDg3nrsA==)     
+    two: 
+      jdbc-url: jdbc:sqlite:C:/Users/EDZ/sqlite3/database/user.db
+      driver-class-name: org.sqlite.JDBC
+      username:
+      password:
+      
+      

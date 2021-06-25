@@ -3,18 +3,15 @@ package com.springboot.test.mapper.one;
 import org.apache.ibatis.annotations.*;
 import org.apache.ibatis.jdbc.SQL;
 import org.springframework.util.StringUtils;
-
 import com.springboot.test.model.Page;
 import com.springboot.test.model.po.User;
 import com.springboot.test.model.vo.UserGroupVo;
-
 import java.util.List;
 
 @Mapper
 public interface UserMapper {
 
     @Insert("insert into p_user(fid, name, age, gid, sex, address, creatTime, updateTime) values(#{fid}, #{name}, #{age}, #{gid}, #{sex}, #{address}, #{creatTime}, #{updateTime})")
-//    @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
     void insertUser(User user);
 
     @Delete("delete from p_user where fid = #{uId}")
@@ -56,7 +53,7 @@ public interface UserMapper {
             return new SQL(){{
                 SELECT("*");
                 FROM("p_user");
-                if(user.getId() != null) {
+                if(user.getFid() != null) {
                     WHERE("fid = #{fid}");
                 }
                 if(user.getAge() != null) {

@@ -23,24 +23,24 @@ public class UserServiceImpl implements IUserService {
 
     @Override
     public User insertUser(User user) {
-        user.setId(UUID.randomUUID().toString().replaceAll("-",""));
+        user.setFid(UUID.randomUUID().toString().replaceAll("-",""));
         Date date = new Date();
         user.setCreatTime(date);
         user.setUpdateTime(date);
-        userMapper1.insertUser(user);
-        return userMapper1.findUserById(user.getId());
+        userMapper2.insertUser(user);
+        return userMapper2.findUserById(user.getFid());
     }
 
     @Override
     public Integer deleteUser(String uId) {
-        return userMapper1.deleteUser(uId);
+        return userMapper2.deleteUser(uId);
     }
 
     @Override
     public User updateUser(User user) {
         user.setUpdateTime(new Date());
-        userMapper1.updateUser(user);
-        return userMapper1.findUserById(user.getId());
+        userMapper2.updateUser(user);
+        return userMapper2.findUserById(user.getFid());
     }
 
     @Override
@@ -50,22 +50,22 @@ public class UserServiceImpl implements IUserService {
 
     @Override
     public List<User> findAllUser(Page page) {
-        return userMapper1.findAllUser(page);
+        return userMapper2.findAllUser(page);
     }
 
     @Override
     public UserGroupVo findUserGroupVo(String uId) {
-        return userMapper1.findUserGroupVo(uId);
+        return userMapper2.findUserGroupVo(uId);
     }
 
     @Override
     public List<User> findUserByCondition(User user) {
-        List<User> userList = userMapper1.findUserByCondition(user);
+        List<User> userList = userMapper2.findUserByCondition(user);
         return userList;
     }
 
     @Override
     public List<User> findAllUser(String name, String gid) {
-        return userMapper1.findAllUserTotal(name, gid);
+        return userMapper2.findAllUserTotal(name, gid);
     }
 }

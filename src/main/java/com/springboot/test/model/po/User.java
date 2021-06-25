@@ -16,8 +16,8 @@ public class User implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	@ApiModelProperty(name = "id", value = "用户id", example="18f36b94852186b4ae998581a9140b51")
-	private String id;
+	@ApiModelProperty(name = "fid", value = "用户id", example="18f36b94852186b4ae998581a9140b51")
+	private String fid;
 
 	@ApiModelProperty(name = "name", value = "用户姓名", example="张三")
 	private String name;
@@ -56,31 +56,31 @@ public class User implements Serializable {
     }
 	
 
-    public User(String id) {
+    public User(String fid) {
         super();
-        this.id = id;
+        this.fid = fid;
     }
 
 
-    public User(String id, String name) {
+    public User(String fid, String name) {
         super();
-        this.id = id;
+        this.fid = fid;
         this.name = name;
     }
 
-    public User(String id, String name, String password) {
+    public User(String fid, String name, String password) {
         super();
-        this.id = id;
+        this.fid = fid;
         this.name = name;
         this.password = password;
     }
 
-    public String getId() {
-        return id;
+    public String getFid() {
+        return fid;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setFid(String fid) {
+        this.fid = fid;
     }
 
     public String getName() {

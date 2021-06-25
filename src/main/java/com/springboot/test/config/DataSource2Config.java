@@ -6,22 +6,29 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.mybatis.spring.annotation.MapperScan;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceBuilder;
-import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.env.Environment;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
- 
+
 @Configuration
 @MapperScan(basePackages = "com.springboot.test.mapper.two", sqlSessionTemplateRef  = "test2SqlSessionTemplate")
 public class DataSource2Config {
- 
+    
+    @Autowired
+    private Environment env;
+    
     @Bean(name = "test2DataSource")
-    @ConfigurationProperties(prefix = "com.springboot.test.mapper.two")
+//    @ConfigurationProperties(prefix = "spring.datasource.two")
     public DataSource testDataSource() {
-        return DataSourceBuilder.create().build();
+        return DataSourceBuilder.create().driverClassName(env.getProperty("spring.datasource.two.driver-class-name"))
+                                .url(env.getProperty("spring.datasource.two.jdbc-url"))
+                                .username(env.getProperty("spring.datasource.two.username"))
+                                .password(env.getProperty("spring.datasource.two.password")).build();
     }
  
     @Bean(name = "test2SqlSessionFactory")
