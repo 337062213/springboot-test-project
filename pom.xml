@@ -11,7 +11,7 @@
   <parent>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-parent</artifactId>
-    <version>1.5.3.RELEASE</version>
+    <version>2.4.3</version>
   </parent>
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -41,11 +41,11 @@
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-jdbc</artifactId>
 	 </dependency>
-<!-- 	<dependency>
+     <dependency>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-websocket</artifactId>
 	</dependency>
-	<dependency>
+<!-- 	<dependency>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-web-services</artifactId>
     </dependency> -->
@@ -71,8 +71,7 @@
 	<dependency>
 		<groupId>org.apache.commons</groupId>
 		<artifactId>commons-lang3</artifactId>
-		<version>3.7</version>
-	</dependency>
+		</dependency>
 	<dependency>
 	    <groupId>org.apache.commons</groupId>
 	    <artifactId>commons-io</artifactId>
@@ -116,7 +115,8 @@
 	</dependency>	
 	<dependency>
 		<groupId>dom4j</groupId>		
-		<artifactId>dom4j</artifactId>		
+		<artifactId>dom4j</artifactId>
+		<version>1.6.1</version>		
 	</dependency>
 	<!-- XML parser end-->
 	<dependency>
@@ -188,6 +188,7 @@
 	<dependency>
 	    <groupId>org.json</groupId>
 	    <artifactId>json</artifactId>
+	    <version>20190722</version>
 	</dependency>
 	<!--google二维码相关依赖   如果是非 web 应用则导入 core 包即可，如果是 web 应用，则 core 与 javase 一起导入。-->
 	<dependency>
@@ -210,6 +211,7 @@
 	<dependency>
 	    <groupId>org.codehaus.groovy</groupId>
 	    <artifactId>groovy-all</artifactId>
+	    <version>2.4.13</version>
 	</dependency>
 	<!-- httpClient4.5.3 -->
 	<dependency>

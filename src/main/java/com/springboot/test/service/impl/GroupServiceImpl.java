@@ -1,6 +1,6 @@
 package com.springboot.test.service.impl;
 
-import com.springboot.test.mapper.one.GroupMapper;
+import com.springboot.test.mapper.one.GroupMapper1;
 import com.springboot.test.model.po.Group;
 import com.springboot.test.model.vo.GroupUserVo;
 import com.springboot.test.service.IGroupService;
@@ -18,7 +18,7 @@ import java.util.UUID;
 public class GroupServiceImpl implements IGroupService {
 
     @Autowired
-    private GroupMapper groupMapper;
+    private GroupMapper1 groupMapper;
 
     @Override
     public Group insertGroup(Group group) {

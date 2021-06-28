@@ -22,13 +22,15 @@ spring:
   jpa:
     show-sql: true
   datasource:
+              # 当前激活的数据源 默认two
+    active:
     one:
       jdbc-url: jdbc:postgresql://localhost:5432/postgres
       driver-class-name: org.postgresql.Driver
       username: ENC(bgycBQxsrtvJcyqyUmOeUixA2hZdCOVX)
       password: ENC(9XNfyAmJJD6IfFnDg3nrsA==)     
     two: 
-      jdbc-url: jdbc:sqlite:C:/Users/EDZ/sqlite3/database/user.db
+      jdbc-url: jdbc:sqlite:C:/Users/EDZ/sqlite3/database/user.db?date_string_format=yyyy-MM-dd HH:mm:ss
       driver-class-name: org.sqlite.JDBC
       username:
       password:

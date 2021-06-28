@@ -46,7 +46,7 @@ public class HelloWorldControllerTest {
 
         mock.perform(
         	post("/springboot/hello")
-	             .contentType(MediaType.APPLICATION_JSON_UTF8)
+	             .contentType(MediaType.APPLICATION_NDJSON_VALUE)
 	             .contentType("application/json")
 	             .content(requestJson).param("name", "Tom").param("password", "w4354"))
             .andDo(print())

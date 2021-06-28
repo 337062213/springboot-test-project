@@ -17,7 +17,7 @@ import org.apache.ibatis.annotations.Many;
 import org.apache.ibatis.mapping.FetchType;
 
 @Mapper
-public interface GroupMapper {
+public interface GroupMapper1 {
     
     @Insert("insert into p_group(id, name, creatTime, updateTime) values(#{id}, #{groupName}, #{creatTime}, #{updateTime})")
     void insertGroup(Group group);

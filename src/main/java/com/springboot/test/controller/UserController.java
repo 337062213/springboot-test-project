@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import com.springboot.test.annotation.Secret;
+import com.springboot.test.model.Page;
 import com.springboot.test.model.po.User;
 import com.springboot.test.model.vo.BaseVO;
 import com.springboot.test.model.vo.ResultVO;
@@ -81,7 +82,6 @@ public class UserController {
     @GetMapping("/{uid}")
     public User findUserById(@PathVariable("uid") String uid) {
         User user = userService.findUserById(uid);
-        logger.info("findUserById =>" + user.toString());
         return user;
     }
 
@@ -118,8 +118,13 @@ public class UserController {
         return userGroupVo;
     }
 
-    @GetMapping("/find")
+    @GetMapping("/findByCondition")
     public List<User> findUserByCondition(User user) {
         return userService.findUserByCondition(user);
+    }
+    
+    @GetMapping("/findByPage")
+    public List<User> findUserByPage(Page page) {
+        return userService.findAllUser(page);
     }
 }

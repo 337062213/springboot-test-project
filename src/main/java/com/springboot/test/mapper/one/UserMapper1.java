@@ -2,14 +2,15 @@ package com.springboot.test.mapper.one;
 
 import org.apache.ibatis.annotations.*;
 import org.apache.ibatis.jdbc.SQL;
-import org.springframework.util.StringUtils;
+import org.springframework.util.ObjectUtils;
 import com.springboot.test.model.Page;
 import com.springboot.test.model.po.User;
 import com.springboot.test.model.vo.UserGroupVo;
 import java.util.List;
+import java.util.Map;
 
 @Mapper
-public interface UserMapper {
+public interface UserMapper1 {
 
     @Insert("insert into p_user(fid, name, age, gid, sex, address, creatTime, updateTime) values(#{fid}, #{name}, #{age}, #{gid}, #{sex}, #{address}, #{creatTime}, #{updateTime})")
     void insertUser(User user);
@@ -38,13 +39,13 @@ public interface UserMapper {
 
 
     /**
-     * 根据id age gid 查找用户
+     *  @description 根据id age gid 查找用户
      */
     @SelectProvider(type = mybatisSql.class, method = "findUserByCondition")
     List<User> findUserByCondition(User user);
 
     @SelectProvider(type = mybatisSql.class, method = "findAllUserTotal")
-    List<User> findAllUserTotal(String name, String gid);
+    List<User> findAllUserTotal(@Param(value = "name") String name, @Param(value = "gid")String gid);
 
 
     class mybatisSql {
@@ -66,15 +67,15 @@ public interface UserMapper {
             }}.toString();
         };
 
-        public String findAllUserTotal(String name, String gid) {
+        public String findAllUserTotal(Map<String, Object> para) {
 
             return new SQL(){{
                 SELECT("*");
                 FROM("p_user");
-                if(!StringUtils.isEmpty(name)) {
+                if(!ObjectUtils.isEmpty(para.get("name"))) {
                     WHERE("name like #{name}");
                 }
-                if(!StringUtils.isEmpty(gid)) {
+                if(!ObjectUtils.isEmpty(para.get("gid"))) {
                     WHERE("gid = #{gid}");
                 }
             }}.toString();
