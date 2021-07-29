@@ -33,6 +33,8 @@ spring:
       jdbc-url: jdbc:sqlite:C:/Users/EDZ/sqlite3/database/user.db?date_string_format=yyyy-MM-dd HH:mm:ss
       driver-class-name: org.sqlite.JDBC
       username:
-      password:
+      password:  servlet:    multipart:      enabled: true
+      max-file-size: 100MB
+      max-request-size: 100MB
       
       
