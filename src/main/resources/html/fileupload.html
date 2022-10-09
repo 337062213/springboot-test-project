@@ -10,12 +10,12 @@
 		window.onload=function myfun() {
 			myVar = setInterval(function(){ myTimer() }, 1000);
 		};		
-		let patt1=new RegExp("best");
-		document.write(patt1.exec("The best things in life are free"));
-		var number = Math.round(Math.random()*500 + 500);
-		var myVar = null, promptValue = "";
+		let pattern1=new RegExp("best");
+		document.write(pattern1.exec("The best things in life are free"));
+		let number = Math.round(Math.random()*500 + 500);
+		let myVar = null, promptValue = "";
 		//有取消按钮
-		var confirmValue = confirm("Please confirm whether to continue or quit");
+		let confirmValue = confirm("Please confirm whether to continue or quit");
 		if(confirmValue){
 			alert(number);
 			if(number>=750){
@@ -45,8 +45,8 @@
 			}
 		}
 		function myTimer() {
-			var d = new Date();
-			var t = d.toLocaleTimeString();
+			let d = new Date();
+			let t = d.toLocaleTimeString();
 			document.getElementById("time").innerHTML = t;
 			document.getElementById("time").style.background= "bisque"; // 改变背景颜色
 		}
@@ -58,9 +58,22 @@
 		function start() {
 			myVar = setInterval(function(){ myTimer() }, 1000);
 		}
+		function previewFile() {
+		  debugger
+		  let preview = document.querySelector('img');
+		  let file    = document.querySelector('input[type=file]').files;
+		  let reader  = new FileReader();
+		  reader.addEventListener('load', function () {
+			preview.src = reader.result;
+		  }, false);
+
+		  if (file) {
+			reader.readAsDataURL(file);
+		  }
+		}
 		
 		document.onkeydown=function(event){
-			var e = event || window.event || arguments.callee.caller.arguments[0];
+			let e = event || window.event || arguments.callee.caller.arguments[0];
 			if(e && e.keyCode==27){ // 按 Esc 
 				 alert("按 esc");
 			}else if(e && e.keyCode==113){ // 按 F2 
@@ -96,7 +109,7 @@
 		<form action='http://localhost:8081/springboot/file/batch/upload' method='post' enctype='multipart/form-data'>
 			上传文件1：<input type="file" name="file"><br/>
 			上传文件2：<input type="file" name="file"><br/>
-			<button type='submit'>上传</button>
+			<button type='submit'>上传</button><button type='button' onclick='previewFile()'>查看文件</button></p>
 		</form>
 		<h2>http://localhost:8081/springboot/file/upload1</h2>
 		<form action='http://localhost:8081/springboot/file/upload1' method='post' enctype='multipart/form-data'>
@@ -106,7 +119,7 @@
 		</form>
 		<div class="login">
 			<div class="login-box" id="login-id">
-				<span class="caption">欢迎您注册网站会员，如果您已有账户，则可就在此<span style="font-style: blue;">登录</span></span>
+				<span class="caption">欢迎您注册网站会员，如果您已有账户，则可就在此<span style="font-style: normal;">登录</span></span>
 				<div class="login-text">
 					用&nbsp;户&nbsp;名：<input id="username" type="text" class="username" onblur="onUserNameBlur(this)"/> <span class="span1">用户名支持数字和字母，位数至少为四位</span><br>
 					设置密码: <input id="password" type="password" class="password" onblur="pwdonblur(this, document.getElementById('passwordss'))"/> <span class="span2">密码支持数字和字母，位数至少为四位</span><br>
@@ -117,6 +130,8 @@
 					<input type="button"  value="立即注册" class="zhuce"/>
 				</div>
 			</div>
+		</div>
+		<div>
 		</div>
 	</body>
 </html>

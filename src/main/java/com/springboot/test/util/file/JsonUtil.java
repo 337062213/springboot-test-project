@@ -17,7 +17,7 @@ import com.alibaba.fastjson.JSONObject;
 
 public class JsonUtil {
      
-     public static boolean iteraJsonOrArray(String source,Map<String, Object> map){
+     public static boolean iteratorJsonOrArray(String source,Map<String, Object> map){
          if(source.indexOf(":") == -1){
              return true;
          }
@@ -34,7 +34,7 @@ public class JsonUtil {
                  //当字符串中不存在：说明已经是值了，如果存在：也可能是日期类型的数据，所以用正则表达式匹配，如果是日期，就直接放入Map中
                      map.put(key, val);
                  }else{
-                     iteraJsonOrArray(val,map);
+                     iteratorJsonOrArray(val,map);
                  }
              }else if(val.indexOf("[{") != -1){
                  //说明存在数组json即格式为：[{开头的json数组
@@ -48,12 +48,12 @@ public class JsonUtil {
                      jsons = jsons.replaceAll("\\}\\s?,\\s?\\{", "}|{");
                      String[] split = jsons.split("\\|");
                      for(int i = 0; i < split.length;i++){
-                         iteraJsonOrArray(split[i],map);//符合当前递归条件
+                         iteratorJsonOrArray(split[i],map);//符合当前递归条件
                      }
                      
                  }else{
                      //说明value可能是一个json，这个json中任然包含数组。例如：{inner:[{a:1,b:2,c:3}]}
-                     iteraJsonOrArray(val,map);//符合当前递归条件
+                     iteratorJsonOrArray(val,map);//符合当前递归条件
                  }
              }
              
@@ -544,7 +544,7 @@ public class JsonUtil {
              "    \"台湾\": [\"台北市\", \"高雄市\", \"基隆市\", \"台中市\", \"台南市\", \"新竹市\", \"嘉义市\", \"台北县\", \"宜兰县\", \"新竹县\", \"桃园县\", \"苗栗县\", \"台中县\", \"彰化县\", \"南投县\", \"嘉义县\", \"云林县\", \"台南县\", \"高雄县\", \"屏东县\", \"台东县\", \"花莲县\", \"澎湖县\", \"其他\"]\r\n" + 
              "}";
          Map<String, Object> res = new HashMap<>();
-         iteraJsonOrArray(test,res);
+         iteratorJsonOrArray(test,res);
          Set<String> keySet = res.keySet();
          Iterator<String> iterator = keySet.iterator();
          while(iterator.hasNext()){
