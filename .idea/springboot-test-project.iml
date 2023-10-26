@@ -176,11 +176,12 @@
     <orderEntry type="library" name="Maven: org.apache.xmlbeans:xmlbeans:3.1.0" level="project" />
     <orderEntry type="library" name="Maven: org.apache.poi:poi-scratchpad:4.1.2" level="project" />
     <orderEntry type="library" name="Maven: fr.opensagres.xdocreport:xdocreport:2.0.2" level="project" />
-    <orderEntry type="library" name="Maven: com.alibaba:druid:1.1.9" level="project" />
-    <orderEntry type="library" name="Maven: org.xerial:sqlite-jdbc:3.32.3.3" level="project" />
-    <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-configuration-processor:2.4.3" level="project" />
     <orderEntry type="library" name="Maven: fr.opensagres.xdocreport:org.apache.poi.xwpf.converter.xhtml:1.0.6" level="project" />
     <orderEntry type="library" name="Maven: fr.opensagres.xdocreport:org.apache.poi.xwpf.converter.core:1.0.6" level="project" />
     <orderEntry type="library" name="Maven: org.apache.poi:ooxml-schemas:1.1" level="project" />
+    <orderEntry type="library" name="Maven: com.alibaba:druid:1.1.9" level="project" />
+    <orderEntry type="library" name="Maven: org.xerial:sqlite-jdbc:3.32.3.3" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-configuration-processor:2.4.3" level="project" />
+    <orderEntry type="library" name="Maven: net.coobird:thumbnailator:0.4.17" level="project" />
   </component>
 </module>
